@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: air-cargo-deployment
+  labels:
+    app: air-cargo-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: air-cargo-service
+  template:
+    metadata:
+      labels:
+        app: air-cargo-service
+    spec:
+      containers:
+      - name: air-cargo-service
+        image: dhl-air-cargo-service:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 5003
+        env:
+        - name: PORT
+          value: "5003"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: air-cargo-service
+spec:
+  selector:
+    app: air-cargo-service
+  ports:
+    - protocol: TCP
+      port: 5003
+      targetPort: 5003
+  type: ClusterIP
