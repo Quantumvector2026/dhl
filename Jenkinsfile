@@ -64,8 +64,7 @@ stage(Security_scan_trivy_filesystem)
         sh 'trivy fs --exit-code 0 --severity HIGH,CRITICAL --format table .'
     }
 }
-    }
-/*
+
 stage("Build_Docker_image")
 {
     steps
@@ -76,7 +75,6 @@ stage("Build_Docker_image")
     }
 }
 }
-*/
     post
     {
         failure
