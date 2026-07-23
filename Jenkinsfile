@@ -53,7 +53,8 @@ pipeline {
                 }
             }
         }
-        *.
+        */
+    
         
 stage(Security_scan_trivy_filesystem)
 {
